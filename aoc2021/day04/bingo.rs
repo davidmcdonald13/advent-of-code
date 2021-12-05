@@ -18,17 +18,30 @@ fn main() {
     }).collect();
 
     let mut performed_moves: HashSet<&str> = HashSet::new();
+    let mut solved_boards: HashSet<usize> = HashSet::new();
     for this_move in moves {
         performed_moves.insert(this_move);
-        for board in &boards {
+        for (i, board) in boards.iter().enumerate() {
+            if solved_boards.contains(&i) {
+                continue;
+            }
+
             if winning_board(&board, &performed_moves) {
-                let unused: usize = get_unused_sum(&board, &performed_moves);
-                println!("unused: {}", unused);
-                println!("last move: {}", this_move);
-                println!("result: {}", unused * this_move.parse::<usize>().unwrap());
-                return;
+                solved_boards.insert(i);
+
+                if solved_boards.len() == 1 || solved_boards.len() == boards.len() {
+                    let unused: usize = get_unused_sum(&board, &performed_moves);
+                    println!("unused: {}", unused);
+                    println!("last move: {}", this_move);
+                    println!("result: {}", unused * this_move.parse::<usize>().unwrap());
+
+                    if solved_boards.len() == boards.len() {
+                        return;
+                    }
+                }
             }
         }
+
     }
 }
 
