@@ -7,10 +7,17 @@ def is_small(node):
     return ord('a') <= ord(node[0]) <= ord('z')
 
 
-def dfs(node, target, graph, disallowed):
-    #print(node, target, graph, disallowed)
+def is_super_disallowed(node):
+    return node in ["start", "end"]
+
+
+def dfs(node, target, graph, disallowed, override_disallowed):
+    new_override_disallowed = override_disallowed
     if node in disallowed:
-        return list()
+        if override_disallowed and not is_super_disallowed(node):
+            new_override_disallowed = False
+        else:
+            return list()
     if node == target:
         return [[target]]
 
@@ -20,14 +27,14 @@ def dfs(node, target, graph, disallowed):
 
     result = list()
     for dest in graph[node]:
-        subresult = dfs(dest, target, graph, new_disallowed)
+        subresult = dfs(dest, target, graph, new_disallowed, new_override_disallowed)
         for x in subresult:
             result.append([node] + x)
 
     return result
 
 
-def main(filename):
+def main(filename, override_disallowed):
     graph = defaultdict(set)
     with open(filename, "r") as f:
         for line in f.readlines():
@@ -35,11 +42,13 @@ def main(filename):
             graph[a].add(b)
             graph[b].add(a)
 
-    result = dfs("start", "end", graph, set())
+    result = dfs("start", "end", graph, set(), override_disallowed)
+
     return len(result)
 
 
 if __name__ == "__main__":
-    filenames = sys.argv[1:]
+    override_disallowed = sys.argv[1] == "True"
+    filenames = sys.argv[2:]
     for filename in filenames:
-        print(filename, "result:", main(filename))
+        print(filename, "result:", main(filename, override_disallowed))
