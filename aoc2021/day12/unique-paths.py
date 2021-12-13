@@ -36,9 +36,10 @@ def main(filename):
             graph[b].add(a)
 
     result = dfs("start", "end", graph, set())
-    print("path_count:", len(result))
+    return len(result)
 
 
 if __name__ == "__main__":
-    filename = sys.argv[1]
-    main(filename)
+    filenames = sys.argv[1:]
+    for filename in filenames:
+        print(filename, "result:", main(filename))
