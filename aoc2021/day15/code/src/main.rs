@@ -39,7 +39,7 @@ fn main() {
     let mut pq = PriorityQueue::new();
     pq.push((0, 0, 0), 0);
 
-    let mut count: usize = 1;
+    let mut uniqifier: usize = 1;
     while !pq.is_empty() {
         let val = pq.pop().unwrap();
 
@@ -55,19 +55,19 @@ fn main() {
         result[row][col] = cost;
 
         if row > 0 {
-            pq.push((row - 1, col, count), -cost - risks[row - 1][col]);
+            pq.push((row - 1, col, uniqifier), -cost - risks[row - 1][col]);
         }
         if row + 1 < risks.len() {
-            pq.push((row + 1, col, count), -cost - risks[row + 1][col]);
+            pq.push((row + 1, col, uniqifier), -cost - risks[row + 1][col]);
         }
         if col > 0 {
-            pq.push((row, col - 1, count), -cost - risks[row][col - 1]);
+            pq.push((row, col - 1, uniqifier), -cost - risks[row][col - 1]);
         }
         if col + 1 < risks[0].len() {
-            pq.push((row, col + 1, count), -cost - risks[row][col + 1]);
+            pq.push((row, col + 1, uniqifier), -cost - risks[row][col + 1]);
         }
 
-        count += 1;
+        uniqifier += 1;
     }
 
     println!("result: {}", result[risks.len() - 1][risks[0].len() - 1]);
