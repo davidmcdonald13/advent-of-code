@@ -1,0 +1,3 @@
+Sue 323: perfumes: 1, trees: 6, goldfish: 0
+Sue 446: akitas: 0, perfumes: 1, vizslas: 2
+Sue 475: vizslas: 7, perfumes: 1, trees: 6

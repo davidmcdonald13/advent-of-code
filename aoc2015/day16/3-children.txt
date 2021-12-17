@@ -1,0 +1,5 @@
+Sue 213: children: 3, goldfish: 5, vizslas: 0
+Sue 327: children: 3, perfumes: 4, cars: 1
+Sue 361: children: 3, akitas: 2, cats: 5
+Sue 402: cats: 8, vizslas: 4, children: 3
+Sue 451: cats: 4, perfumes: 8, children: 3
