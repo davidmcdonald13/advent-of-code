@@ -1,0 +1,3 @@
+Rustify & speed up day 16 (both parts, but definitely part 2)
+Rustify day 13
+Rustify & clean up day 17 (part 2 was done partially by hand -- programmatize it)
